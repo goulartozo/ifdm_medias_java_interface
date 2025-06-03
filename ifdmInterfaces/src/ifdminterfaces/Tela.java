@@ -116,6 +116,14 @@ public class Tela extends JFrame {
         cidComboBox.setBounds(70, 20, 200, 25);
         cidJPanel.add(cidComboBox);
         
+        cidComboBox.addActionListener(e -> {
+        String cidadeSelecionada = (String) cidComboBox.getSelectedItem();{
+                 process.carregarDadoCidade(cidadeSelecionada, saudeCidJtf);
+                 process.carregarDadoEducacaoCid(cidadeSelecionada, eduCidJtf);
+            }
+           
+        });
+        
         ufComboBox.addActionListener(e -> {
         String estadoSelecionado = (String) ufComboBox.getSelectedItem();
             if (estadoSelecionado != null) {

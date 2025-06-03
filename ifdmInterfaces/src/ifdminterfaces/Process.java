@@ -140,7 +140,7 @@ public class Process {
         }
     }
     
-     public void carregarDadoIfdmUF(String siglaUf, JTextField ifdmUfJtf) {
+    public void carregarDadoIfdmUF(String siglaUf, JTextField ifdmUfJtf) {
         try {
             
             Class.forName(driver);
@@ -165,5 +165,60 @@ public class Process {
             e.printStackTrace();
         }
     }
+     
+     //medias das cidades
+     
+    public void carregarDadoCidade(String cidade, JTextField saudeCidJtf) {
+        try {
+            
+            Class.forName(driver);
+            Connection conexao = DriverManager.getConnection(url, usuario, senha);
+            System.out.println("Conexão realizada com sucesso");
+            
+            String sql = "SELECT AVG(( IFNULL(ifdm_saude_2013, 0) + IFNULL(ifdm_saude_2014, 0) + IFNULL(ifdm_saude_2015, 0) + IFNULL(ifdm_saude_2016, 0) + IFNULL(ifdm_saude_2017, 0) + IFNULL(ifdm_saude_2018, 0) + IFNULL(ifdm_saude_2019, 0) + IFNULL(ifdm_saude_2020, 0) + IFNULL(ifdm_saude_2021, 0) + IFNULL(ifdm_saude_2022, 0) + IFNULL(ifdm_saude_2023, 0) ) / 11.0) AS media_ifdm_saude FROM ifdm_saude WHERE nome_munic = ?;";
+            PreparedStatement pst = conexao.prepareStatement(sql);
+            pst.setString(1, cidade);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                saudeCidJtf.setText(rs.getString("media_ifdm_saude"));
+            }
+            
+            rs.close();
+            pst.close();
+            conexao.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void carregarDadoEducacaoCid(String cidade, JTextField eduCidJtf) {
+        try {
+            
+            Class.forName(driver);
+            Connection conexao = DriverManager.getConnection(url, usuario, senha);
+            System.out.println("Conexão realizada com sucesso");
+            
+            String sql = "SELECT AVG(( IFNULL(ifdm_educacao_2013, 0) + IFNULL(ifdm_educacao_2014, 0) + IFNULL(ifdm_educacao_2015, 0) + IFNULL(ifdm_educacao_2016, 0) + IFNULL(ifdm_educacao_2017, 0) + IFNULL(ifdm_educacao_2018, 0) + IFNULL(ifdm_educacao_2019, 0) + IFNULL(ifdm_educacao_2020, 0) + IFNULL(ifdm_educacao_2021, 0) + IFNULL(ifdm_educacao_2022, 0) + IFNULL(ifdm_educacao_2023, 0) ) / 11.0) AS media_ifdm_educacao FROM ifdm_educacao WHERE nome_munic = ?;";
+            PreparedStatement pst = conexao.prepareStatement(sql);
+            pst.setString(1, cidade);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                eduCidJtf.setText(rs.getString("media_ifdm_educacao"));
+            }
+            
+            rs.close();
+            pst.close();
+            conexao.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     
     
 }
