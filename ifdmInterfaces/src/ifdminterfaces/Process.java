@@ -219,6 +219,111 @@ public class Process {
             e.printStackTrace();
         }
     }
+    
+    public void carregarDadoRendaCid(String cidade, JTextField rendaCidJtf) {
+        try {
+            
+            Class.forName(driver);
+            Connection conexao = DriverManager.getConnection(url, usuario, senha);
+            System.out.println("Conexão realizada com sucesso");
+            
+            String sql = "SELECT AVG(( IFNULL(ifdm_emprego_2013, 0) + IFNULL(ifdm_emprego_2014, 0) + IFNULL(ifdm_emprego_2015, 0) + IFNULL(ifdm_emprego_2016, 0) + IFNULL(ifdm_emprego_2017, 0) + IFNULL(ifdm_emprego_2018, 0) + IFNULL(ifdm_emprego_2019, 0) + IFNULL(ifdm_emprego_2020, 0) + IFNULL(ifdm_emprego_2021, 0) + IFNULL(ifdm_emprego_2022, 0) + IFNULL(ifdm_emprego_2023, 0) ) / 11.0) AS media_ifdm_emprego FROM ifdm_empregoerenda WHERE nome_munic = ?;";
+            PreparedStatement pst = conexao.prepareStatement(sql);
+            pst.setString(1, cidade);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                rendaCidJtf.setText(rs.getString("media_ifdm_emprego"));
+            }
+            
+            rs.close();
+            pst.close();
+            conexao.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void carregarDadoIFDMCid(String cidade, JTextField ifdmCidJtf) {
+        try {
+            
+            Class.forName(driver);
+            Connection conexao = DriverManager.getConnection(url, usuario, senha);
+            System.out.println("Conexão realizada com sucesso");
+            
+            String sql = "SELECT AVG(( IFNULL(ifdm_2013, 0) + IFNULL(ifdm_2014, 0) + IFNULL(ifdm_2015, 0) + IFNULL(ifdm_2016, 0) + IFNULL(ifdm_2017, 0) + IFNULL(ifdm_2018, 0) + IFNULL(ifdm_2019, 0) + IFNULL(ifdm_2020, 0) + IFNULL(ifdm_2021, 0) + IFNULL(ifdm_2022, 0) + IFNULL(ifdm_2023, 0) ) / 11.0) AS media_ifdm_geral FROM ifdm_geral WHERE nome_munic = ?;";
+            PreparedStatement pst = conexao.prepareStatement(sql);
+            pst.setString(1, cidade);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                ifdmCidJtf.setText(rs.getString("media_ifdm_geral"));
+            }
+            
+            rs.close();
+            pst.close();
+            conexao.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void carregarDadoRankNac(String cidade, JTextField rankNacCidJtf) {
+        try {
+            
+            Class.forName(driver);
+            Connection conexao = DriverManager.getConnection(url, usuario, senha);
+            System.out.println("Conexão realizada com sucesso");
+            
+            String sql = "SELECT AVG(( IFNULL(ranking_ifdm_2013, 0) + IFNULL(ranking_ifdm_2014, 0) + IFNULL(ranking_ifdm_2015, 0) + IFNULL(ranking_ifdm_2016, 0) + IFNULL(ranking_ifdm_2017, 0) + IFNULL(ranking_ifdm_2018, 0) + IFNULL(ranking_ifdm_2019, 0) + IFNULL(ranking_ifdm_2020, 0) + IFNULL(ranking_ifdm_2021, 0) + IFNULL(ranking_ifdm_2022, 0) + IFNULL(ranking_ifdm_2023, 0) ) / 11.0) AS media_ranking_nacional_ifdm FROM ifdm_geral WHERE nome_munic = ?;";
+                    
+            PreparedStatement pst = conexao.prepareStatement(sql);
+            pst.setString(1, cidade);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                rankNacCidJtf.setText(rs.getString("media_ranking_nacional_ifdm"));
+            }
+            
+            rs.close();
+            pst.close();
+            conexao.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void carregarDadoRankEsta(String cidade, JTextField rankEstCidJtf) {
+        try {
+            
+            Class.forName(driver);
+            Connection conexao = DriverManager.getConnection(url, usuario, senha);
+            System.out.println("Conexão realizada com sucesso");
+            
+            String sql = "SELECT AVG(( IFNULL(ranking_estadual_ifdm_2013, 0) + IFNULL(ranking_estadual_ifdm_2014, 0) + IFNULL(ranking_estadual_ifdm_2015, 0) + IFNULL(ranking_estadual_ifdm_2016, 0) + IFNULL(ranking_estadual_ifdm_2017, 0) + IFNULL(ranking_estadual_ifdm_2018, 0) + IFNULL(ranking_estadual_ifdm_2019, 0) + IFNULL(ranking_estadual_ifdm_2020, 0) + IFNULL(ranking_estadual_ifdm_2021, 0) + IFNULL(ranking_estadual_ifdm_2022, 0) + IFNULL(ranking_estadual_ifdm_2023, 0) ) / 11.0) AS media_ranking_estadual_ifdm FROM ifdm_geral WHERE nome_munic = ?;";
+            PreparedStatement pst = conexao.prepareStatement(sql);
+            pst.setString(1, cidade);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                rankEstCidJtf.setText(rs.getString("media_ranking_estadual_ifdm"));
+            }
+            
+            rs.close();
+            pst.close();
+            conexao.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
      
     
 }

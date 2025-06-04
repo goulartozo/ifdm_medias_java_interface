@@ -120,6 +120,10 @@ public class Tela extends JFrame {
         String cidadeSelecionada = (String) cidComboBox.getSelectedItem();{
                  process.carregarDadoCidade(cidadeSelecionada, saudeCidJtf);
                  process.carregarDadoEducacaoCid(cidadeSelecionada, eduCidJtf);
+                 process.carregarDadoRendaCid(cidadeSelecionada, rendaCidJtf);
+                 process.carregarDadoIFDMCid(cidadeSelecionada, ifdmCidJtf);
+                 process.carregarDadoRankNac(cidadeSelecionada, rankNacCidJtf);
+                 process.carregarDadoRankEsta(cidadeSelecionada, rankEstCidJtf);
             }
            
         });
